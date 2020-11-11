@@ -29,13 +29,16 @@
                         <button (click)="getCoincidences()" type="submit" class="btn btn-block btn-primary col-2">Buscar</button>
                     </div>
                 </form> 
-                <div class="card p-2 row justify-content-around m-0 mb-1" *ngFor="let page of result[0]" >
-                  <h5 class="text-info">{{page[0]}}</h5>
-                  <p class="text-gray text-body small">{{page[1]}}</p>
-                  <div *ngFor="let word of getlist(page[0])">
-                    <b>{{word}}</b>
-                  </div>
+                <div *ngIf="!result?.size; message">
+                    <div class="card p-2 row justify-content-around m-0 mb-1" *ngFor="let page of result[0]" >
+                        <h5 class="text-info">{{page[0]}}</h5>
+                        <p class="text-gray text-body small">{{page[1]}}</p>
+                        <div *ngFor="let word of getlist(page[0])">
+                            <b>{{word}}</b>
+                        </div>
+                    </div>
                 </div>
+                <div #message>No se han encontrado coincidencias</div>
             </div>
         </div>
     </div>

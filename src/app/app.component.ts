@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'search-engine';
 
   results: boolean = false;
+  message: String = "";
 
   words = "";
   input = { "words": [] };
@@ -46,9 +47,11 @@ export class AppComponent {
       });
     }
 
-    this.result = new Array([...result.entries()].sort((a, b) => b[1] - a[1]));
-    //console.log(this.result);
-    //console.log(this.words_map);
+    if (result.size != 0) {
+      this.result = new Array([...result.entries()].sort((a, b) => b[1] - a[1]));
+    } else {
+      this.message = "No hay coincidencias encontradas";
+    }
   }
 
   getCoincidences() {
@@ -56,9 +59,11 @@ export class AppComponent {
     //console.log(this.input);
     this._service.getAllTasks(this.input).subscribe(
       res => {
+        this.words_map.clear();
+        this.result = [];
         this.mapping(res);
         this.results = true;
-        console.log(res);
+        this.message = "";
       },
       error => {
         console.log(error);
