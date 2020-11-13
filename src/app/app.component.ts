@@ -59,6 +59,7 @@ export class AppComponent {
     //console.log(this.input);
     this._service.getAllTasks(this.input).subscribe(
       res => {
+        console.log(res)
         this.words_map.clear();
         this.result = [];
         this.mapping(res);
